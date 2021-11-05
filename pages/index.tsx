@@ -21,14 +21,21 @@ const Home: NextPage = () => {
           In the meantime, check me out on{' '}
           <a
             className={styles.link}
+            target="_blank"
             href="https://www.instagram.com/byclaykay/"
+            rel="noreferrer"
           >
             instagram!
           </a>
         </p>
         <p>
           Or visit{' '}
-          <a className={styles.link} href="https://claykaufmann.com">
+          <a
+            className={styles.link}
+            target="_blank"
+            href="https://claykaufmann.com"
+            rel="noreferrer"
+          >
             my main site!
           </a>
         </p>
