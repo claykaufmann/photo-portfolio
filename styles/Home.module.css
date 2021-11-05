@@ -33,6 +33,14 @@
   text-decoration: none;
 }
 
+.link {
+  color: #0070f3;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
 .title a:hover,
 .title a:focus,
 .title a:active {
