@@ -6,7 +6,7 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Clay Kaufmann Photography</title>
         <meta
           name="description"
           content="Photography portfolio of Clay Kaufmann"
