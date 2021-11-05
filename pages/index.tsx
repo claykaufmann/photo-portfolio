@@ -19,13 +19,16 @@ const Home: NextPage = () => {
         <p>Soon to be my photography portfolio...</p>
         <p>
           In the meantime, check me out on{' '}
-          <a className={styles.link} href="">
+          <a
+            className={styles.link}
+            href="https://www.instagram.com/byclaykay/"
+          >
             instagram!
           </a>
         </p>
         <p>
           Or visit{' '}
-          <a className={styles.link} href="claykaufmann.com">
+          <a className={styles.link} href="https://claykaufmann.com">
             my main site!
           </a>
         </p>
