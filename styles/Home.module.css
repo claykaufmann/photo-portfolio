@@ -1,6 +1,6 @@
 .container {
   padding: 0 2rem;
-  min-height: 100vh;
+  min-height: 85vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,7 +16,7 @@
 
 .footer {
   display: flex;
-  margin-top: 52vh;
+  margin-top: 40vh;
   padding: 2rem 0;
   justify-content: center;
   align-items: center;
