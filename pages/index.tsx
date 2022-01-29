@@ -41,8 +41,8 @@ const Home: NextPage = () => {
         </p>
         <p>
           Or get in touch with me via email at{' '}
-          <a className={styles.link} href="mailto:me@claykaufmann.com">
-            me@claykaufmann.com
+          <a className={styles.link} href="mailto:claykaufmann@gmail.com">
+            claykaufmann@gmail.com
           </a>
         </p>
       </main>
