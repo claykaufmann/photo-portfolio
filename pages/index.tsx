@@ -1,49 +1,36 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { Heading, Link } from '@chakra-ui/react'
+import NextLink from 'next/link'
 
 const Home: NextPage = () => {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Clay Kaufmann Photography</title>
         <meta
           name="description"
           content="Photography portfolio of Clay Kaufmann"
         />
+        <meta name="author" content="Clay Kaufmann" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <main>
+        <Heading>BYCLAYKAY.</Heading>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>Site under construction...</h1>
-        <p>Soon to be my photography portfolio...</p>
-        <p>
-          In the meantime, check me out on{' '}
-          <a
-            className={styles.link}
-            target="_blank"
-            href="https://www.instagram.com/byclaykay/"
-            rel="noreferrer"
+        <NextLink href="/film">
+          <Heading
+            size="md"
+            cursor="pointer"
+            _hover={{
+              color: 'blue',
+            }}
+            display="inline"
           >
-            instagram!
-          </a>
-        </p>
-        <p>
-          Or visit{' '}
-          <a
-            className={styles.link}
-            target="_blank"
-            href="https://claykaufmann.com"
-            rel="noreferrer"
-          >
-            my main site!
-          </a>
-        </p>
+            FILM
+          </Heading>
+        </NextLink>
       </main>
-
-      <footer className={styles.footer}>
-        <p>Site built by Clay Kaufmann</p>
-      </footer>
     </div>
   )
 }
