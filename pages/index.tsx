@@ -1,7 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { Heading, Stack, HStack, Box, Center, Link } from '@chakra-ui/react'
+import { Heading, Stack, Box, Center } from '@chakra-ui/react'
 import NextLink from 'next/link'
+import Header from '../components/layout/Header'
 
 const Home: NextPage = () => {
   return (
@@ -17,37 +18,43 @@ const Home: NextPage = () => {
       </Head>
 
       <Box margin="0.5em 2em">
-        <HStack justifyContent="space-between">
-          <NextLink href="/">
-            <Heading size="2xl" cursor="pointer" _hover={{ color: 'gray' }}>
-              BYCLAYKAY.
-            </Heading>
-          </NextLink>
-
-          <Link href="https://claykaufmann.com">Back to main site</Link>
-        </HStack>
+        <Header />
 
         <Center height="50vh">
           <Stack
-            align="flex-start"
-            paddingTop="1em"
-            direction={['column', 'row']}
-            spacing={['2rem', '5rem', '15rem']}
+            paddingTop={['7rem', '9rem', '5rem', '12rem']}
+            direction={['column', 'column', 'row']}
+            spacing={['5rem', '7rem', '10rem', '15rem']}
           >
             <NextLink href="/portfolio">
-              <Heading size="xl" cursor="pointer" _hover={{ color: 'gray' }}>
+              <Heading
+                size="xl"
+                cursor="pointer"
+                _hover={{ color: 'gray' }}
+                textAlign="center"
+              >
                 PORTFOLIO.
               </Heading>
             </NextLink>
 
             <NextLink href="/film">
-              <Heading size="xl" cursor="pointer" _hover={{ color: 'gray' }}>
+              <Heading
+                size="xl"
+                cursor="pointer"
+                _hover={{ color: 'gray' }}
+                textAlign="center"
+              >
                 FILM.
               </Heading>
             </NextLink>
 
             <NextLink href="/about">
-              <Heading size="xl" cursor="pointer" _hover={{ color: 'gray' }}>
+              <Heading
+                size="xl"
+                cursor="pointer"
+                _hover={{ color: 'gray' }}
+                textAlign="center"
+              >
                 ABOUT.
               </Heading>
             </NextLink>
