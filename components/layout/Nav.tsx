@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import { Link, HStack } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import BurgerMenuMobile from '../BurgerMenu/BurgerMenuMobile'
+import BurgerMenuMobile from '../BurgerMobile/BurgerMenuMobile'
 
 interface props {
   textColor: string
