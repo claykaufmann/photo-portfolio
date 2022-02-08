@@ -1,0 +1,64 @@
+// mixin to get rid of duplicate styling for opened and closed menu
+@mixin baseMenuStyle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #707888;
+  height: 100vh;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1;
+
+  // make the menu take up the entire screen on phones portrait view
+  // @include theme.media("<=iphone-6-7-8-plus") {
+  //     width: 85vw;
+  // }
+
+  // @include theme.media("<=phone") {
+  //     width: 83vw;
+  //     padding-bottom: 0;
+  // }
+}
+
+.closedMenu {
+  @include baseMenuStyle;
+  transform: translateX(210%);
+}
+
+.openMenu {
+  @include baseMenuStyle;
+  transform: translateX(0);
+
+  // to fix the slight missing part of the menu on the bottom when it opens
+  // @include theme.media("<=iphone-6-7-8-plus") {
+  //     padding-bottom: 0.6rem;
+  // }
+
+  // @include theme.media("<=phone") {
+  //     width: 83vw;
+  //     padding-bottom: 0;
+  // }
+}
+
+.menuLinkText {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  padding: 2rem 0;
+  font-weight: bold;
+  letter-spacing: 0.5rem;
+  text-decoration: none;
+  text-align: center;
+
+  &:hover {
+    color: #f9f9f9ee;
+  }
+
+  // align text to the left on computers/tablets
+  // @include theme.media(">iphone-6-7-8-plus") {
+  //     text-align: left;
+  // }
+}

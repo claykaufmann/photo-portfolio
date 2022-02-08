@@ -1,0 +1,12 @@
+// used to set the footer at the bottom, and fix burger menu issues
+#__next {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+// disable horizontal scrolling, fixes burger menu
+html,
+body {
+  overflow-x: hidden;
+}
