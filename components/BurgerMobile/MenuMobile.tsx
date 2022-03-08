@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import * as React from 'react'
-
+// import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import styles from './MenuMobile.module.scss'
 import { Link } from '@chakra-ui/react'
@@ -14,6 +14,9 @@ interface Props {
 // TODO: check to make sure that the #about relative link works
 
 const Menu: React.VFC<Props> = ({ open, setOpen }) => {
+  // router for detecting active link
+  // TODO: get router working here for liine through active link
+  // const router = useRouter()
   return (
     <nav className={open ? styles.openMenu : styles.closedMenu}>
       <NextLink href="/">
@@ -49,7 +52,7 @@ const Menu: React.VFC<Props> = ({ open, setOpen }) => {
           FILM
         </Link>
       </NextLink>
-      <NextLink href="/#about">
+      <NextLink href="/about">
         <Link
           style={{ textDecoration: 'none' }}
           transition="color 0.3s linear"

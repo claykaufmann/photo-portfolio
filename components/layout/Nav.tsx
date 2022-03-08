@@ -25,7 +25,6 @@ const Nav: React.VFC<props> = ({ textColor }) => {
         <NavLink href="/#about" linkText="About" />
 
         <Link
-          isExternal={true}
           href="https://claykaufmann.com"
           _hover={{
             textDecoration: 'line-through',
