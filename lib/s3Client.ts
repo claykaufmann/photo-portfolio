@@ -3,6 +3,6 @@ const bucketRegion = process.env.AWS_BUCKET_REGION // should be "Ohio"
 
 const s3Client = new S3Client({ region: bucketRegion })
 
-const bucketName = 'photo-website-45hjfg734hgf'
+const bucketName = process.env.BUCKET_NAME
 
 export { s3Client, bucketName, bucketRegion }
