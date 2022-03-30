@@ -8,18 +8,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.58.0",
     "@chakra-ui/react": "^1.7.2",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "framer-motion": "^4",
     "next": "12.0.3",
+    "probe-image-size": "^7.2.3",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-xmasonry": "^3.0.5"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.51",
     "@swc/core": "^1.2.106",
     "@types/node": "16.11.6",
+    "@types/probe-image-size": "^7.0.1",
     "@types/react": "17.0.34",
     "@typescript-eslint/eslint-plugin": "^5.3.0",
     "@typescript-eslint/parser": "^5.0.0\n",
