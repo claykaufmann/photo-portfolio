@@ -1,4 +1,4 @@
-import { PortfolioInfo, Photo, PortfolioThumbnail } from '../types/types'
+import { PortfolioInfo, Photo } from '../types/types'
 import { s3Client, bucketName, bucketRegion } from './s3Client'
 import {
   ListObjectsV2Command,
@@ -110,25 +110,25 @@ export const getPhotosFromPortfolio = async (
   return images
 }
 
-/**
- * returns the header image for each portfolio
- * @param slug a prefix name for an s3 bucket
- */
-export const getPortfolioHeaderImage = (slug: string): Photo => {
-  // we will save header images as header.jpg, collect that file, get necessary info, return it
-}
+// /**
+//  * returns the header image for each portfolio
+//  * @param slug a prefix name for an s3 bucket
+//  */
+// export const getPortfolioHeaderImage = (slug: string): Photo => {
+//   // we will save header images as header.jpg, collect that file, get necessary info, return it
+// }
 
-/**
- * collects all portfolios, from s3 bucket
- */
-export const getAllPortfolios = async (): PortfolioThumbnail[] => {
-  // call getPortfolioSlugs
-  const slugs = getPortfolioSlugs()
-  console.log(slugs)
-  // get respective header images from each slug (can be a special name)
+// /**
+//  * collects all portfolios, from s3 bucket
+//  */
+// export const getAllPortfolios = async (): PortfolioThumbnail[] => {
+//   // call getPortfolioSlugs
+//   const slugs = getPortfolioSlugs()
+//   console.log(slugs)
+//   // get respective header images from each slug (can be a special name)
 
-  // return all slugs
-}
+//   // return all slugs
+// }
 
 export const testS3 = async (slug: string) => {
   const prefix = 'portfolio/' + slug + '/'
