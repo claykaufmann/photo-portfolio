@@ -22,7 +22,7 @@ const Nav: React.VFC<props> = ({ textColor }) => {
 
         <NavLink href="/film" linkText="Film" />
 
-        <NavLink href="/#about" linkText="About" />
+        <NavLink href="/about" linkText="About" />
 
         <Link
           href="https://claykaufmann.com"
