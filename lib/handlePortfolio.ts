@@ -58,8 +58,9 @@ export const getPortfolioBySlug = async (
 
   return {
     title: portfolioInfo.title,
-    slug: portfolioInfo.description,
+    slug: slug,
     photos: photos,
+    description: portfolioInfo.description,
   }
 }
 

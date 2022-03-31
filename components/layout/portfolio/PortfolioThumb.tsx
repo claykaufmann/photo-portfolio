@@ -16,6 +16,7 @@ const PortfolioThumb: React.VFC<Props> = ({ portfolio }) => {
         height={portfolio.headerImage.height}
         width={portfolio.headerImage.width}
         alt={portfolio.headerImage.alt}
+        priority={true}
       />
       <p>{portfolio.description}</p>
     </Container>
