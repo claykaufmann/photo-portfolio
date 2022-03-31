@@ -6,8 +6,9 @@ import {
   getPortfolioSlugs,
 } from '../../lib/handlePortfolio'
 import { ParsedUrlQuery } from 'querystring'
-import { XMasonry, XBlock } from 'react-xmasonry'
 import Image from 'next/image'
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
+import { Flex } from '@chakra-ui/react'
 
 type Props = {
   portfolio: PortfolioInfo
@@ -20,18 +21,31 @@ const PortfolioPage: NextPage<Props> = ({ portfolio }) => {
       <h2>{portfolio.title}</h2>
       <p>{portfolio.description}</p>
 
-      <XMasonry>
-        {images.map((image) => (
-          <XBlock key={image.url}>
-            <Image
-              src={image.url}
-              width={image.width}
-              height={image.height}
-              alt="test"
-            />
-          </XBlock>
-        ))}
-      </XMasonry>
+      <ResponsiveMasonry
+        columnsCountBreakPoints={{ 350: 1, 1200: 2, 1700: 3, 2545: 4 }}
+      >
+        <Masonry gutter="1em">
+          {images.map((image) => (
+            <Flex key={image.url} justify="center">
+              <Image
+                key={image.url}
+                src={image.url}
+                width={image.width}
+                height={image.height}
+                alt="test"
+                className="portfolio-img"
+              />
+              <style jsx global>
+                {`
+                  .portfolio-img {
+                    align-self: center;
+                  }
+                `}
+              </style>
+            </Flex>
+          ))}
+        </Masonry>
+      </ResponsiveMasonry>
     </Base>
   )
 }
