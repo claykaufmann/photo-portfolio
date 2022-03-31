@@ -22,7 +22,7 @@ const PortfolioPage: NextPage<Props> = ({ portfolio }) => {
       <p>{portfolio.description}</p>
 
       <ResponsiveMasonry
-        columnsCountBreakPoints={{ 350: 1, 1200: 2, 1700: 3, 2545: 4 }}
+        columnsCountBreakPoints={{ 350: 1, 1079: 2, 1400: 3, 2545: 4 }}
       >
         <Masonry gutter="1em">
           {images.map((image) => (
