@@ -1,11 +1,20 @@
-import { PortfolioInfo, Photo } from '../types/types'
-import { s3Client, bucketName, bucketRegion } from './s3Client'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  PortfolioInfo,
+  Photo,
+  PortfolioThumbnail,
+  MarkdownPortfolioInfo,
+} from '../types/types'
+import { s3Client, bucketRegion, bucketName } from './s3Client'
+import {
+  GetObjectCommand,
+  GetObjectCommandInput,
   ListObjectsV2Command,
   ListObjectsV2CommandInput,
   ListObjectsV2CommandOutput,
 } from '@aws-sdk/client-s3'
 import probe from 'probe-image-size'
+import matter from 'gray-matter'
 
 export const getPortfolioSlugs = async (): Promise<string[]> => {
   // params for req
@@ -19,7 +28,7 @@ export const getPortfolioSlugs = async (): Promise<string[]> => {
   const command = new ListObjectsV2Command(params)
 
   // send command
-  const response: ListObjectsV2CommandOutput = await s3Client.send(command)
+  const response = await s3Client.send(command)
 
   // create iterator string
   const slugs: string[] = []
@@ -85,16 +94,18 @@ export const getPhotosFromPortfolio = async (
     while (index < response.Contents?.length) {
       // append tag
       const url = bucketURL + response.Contents[index].Key
-      photoURLs.push(url)
+
+      // dont read in markdown file, this will break things
+      if (url.slice(-2) != 'md') {
+        photoURLs.push(url)
+      }
       index = index + 1
     }
   }
-  console.log(photoURLs)
 
   // fetch the width and height using probe
   const images = await Promise.all(
     photoURLs.map(async (url) => {
-      console.log('probing')
       const photoInfo = await probe(url)
 
       const newImage: Photo = {
@@ -102,6 +113,7 @@ export const getPhotosFromPortfolio = async (
         width: photoInfo.width,
         height: photoInfo.height,
       }
+
       return newImage
     })
   )
@@ -110,38 +122,110 @@ export const getPhotosFromPortfolio = async (
   return images
 }
 
-// /**
-//  * returns the header image for each portfolio
-//  * @param slug a prefix name for an s3 bucket
-//  */
-// export const getPortfolioHeaderImage = (slug: string): Photo => {
-//   // we will save header images as header.jpg, collect that file, get necessary info, return it
-// }
+/**
+ * returns a header image for each portfolio
+ * @param slug a prefix name for an s3 bucket
+ */
+export const getPortfolioHeaderImage = async (slug: string): Promise<Photo> => {
+  // TODO: come back to this idea of randomly selecting photos
+  // connect to s3, request all objects in specified prefix that end with jpg, select a random one
+  const photos = await getPhotosFromPortfolio(slug)
 
-// /**
-//  * collects all portfolios, from s3 bucket
-//  */
-// export const getAllPortfolios = async (): PortfolioThumbnail[] => {
-//   // call getPortfolioSlugs
-//   const slugs = getPortfolioSlugs()
-//   console.log(slugs)
-//   // get respective header images from each slug (can be a special name)
+  // randomly select a photo
+  let index = Math.floor(Math.random() * photos.length)
 
-//   // return all slugs
-// }
+  // get image
+  let img = photos[index]
 
-export const testS3 = async (slug: string) => {
-  const prefix = 'portfolio/' + slug + '/'
-  const params: ListObjectsV2CommandInput = {
-    Bucket: bucketName,
-    Prefix: prefix,
+  // for now, for simplicity on CSS, only allow landscape orientation
+  while (img.height > img.width) {
+    index = Math.floor(Math.random() * photos.length)
+    img = photos[index]
   }
 
-  // make command
-  const command = new ListObjectsV2Command(params)
+  const headerImage: Photo = {
+    url: img.url,
+    width: img.width,
+    height: img.height,
+  }
 
-  // send command
-  const response: ListObjectsV2CommandOutput = await s3Client.send(command)
+  return headerImage
+}
 
-  console.log(response)
+/**
+ * collects all portfolios, from s3 bucket
+ */
+export const getAllPortfolios = async (): Promise<PortfolioThumbnail[]> => {
+  // call getPortfolioSlugs
+  const slugs = await getPortfolioSlugs()
+
+  // build portfolios
+  const portfolios: PortfolioThumbnail[] = await Promise.all(
+    // map each slug
+    slugs.map(async (slug) => {
+      // get header image
+      const img = await getPortfolioHeaderImage(slug)
+
+      // get information about portfolio
+      const portfolioInfo = await getPortfolioInformation(slug)
+
+      // build portfolio
+      const portfolio: PortfolioThumbnail = {
+        slug: slug,
+        title: portfolioInfo.title,
+        headerImage: img,
+        description: portfolioInfo.description,
+      }
+
+      // return portfolio
+      return portfolio
+    })
+  )
+
+  // return portfolios
+  return portfolios
+}
+
+const streamToString = async (stream: any): Promise<string> =>
+  new Promise((resolve, reject) => {
+    const chunks: any = []
+    stream.on('data', (chunk: any) => chunks.push(chunk))
+    stream.on('error', reject)
+    stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')))
+  })
+
+/**
+ * get all portfolio information
+ * @param slug the name of the portfolio
+ */
+export const getPortfolioInformation = async (
+  slug: string
+): Promise<MarkdownPortfolioInfo> => {
+  const key = 'portfolio/' + slug + '/' + slug + '.md'
+
+  // query s3 for data
+  const params: GetObjectCommandInput = {
+    Bucket: bucketName,
+    Key: key,
+  }
+
+  const command = new GetObjectCommand(params)
+  const response = await s3Client.send(command)
+
+  if (response.Body) {
+    const res: string = await streamToString(response.Body)
+    const { data } = matter(res)
+
+    const info: MarkdownPortfolioInfo = {
+      title: data.title,
+      description: data.description,
+    }
+
+    return info
+  }
+
+  return {
+    title: 'None',
+    description: 'None',
+  }
 }
