@@ -31,7 +31,7 @@ const Nav: React.VFC<props> = ({ textColor }) => {
             transition: 'width 0.5s ease-in',
           }}
         >
-          MAIN SITE
+          Main Site
         </Link>
       </HStack>
     )

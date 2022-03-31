@@ -13,7 +13,7 @@ type Props = {
 
 const Portfolio: NextPage<Props> = ({ portfolios }) => {
   return (
-    <Base>
+    <Base headerColor="black">
       <Head>
         <title>Portfolio</title>
       </Head>
