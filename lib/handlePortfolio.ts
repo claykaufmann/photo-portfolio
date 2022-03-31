@@ -51,23 +51,28 @@ export const getPortfolioBySlug = async (
 ): Promise<PortfolioInfo> => {
   // make a call to getPhotosFromPortfolio, passing in slug
   const photos = await getPhotosFromPortfolio(slug)
-  // instantiate portfolioInfo object
+
   // add written information about portfolio
+  const portfolioInfo = await getPortfolioInformation(slug)
   // return the portfolioInfo object
+
   return {
-    title: slug,
-    slug: slug,
+    title: portfolioInfo.title,
+    slug: portfolioInfo.description,
     photos: photos,
   }
 }
 
 /**
  * collects all photos from a specified prefix
+ *
  * @param slug a prefix name for an s3 bucket
  */
 export const getPhotosFromPortfolio = async (
   slug: string
 ): Promise<Photo[]> => {
+  // TODO: this function seems to be extremely slow...
+
   // set prefix
   const prefix = 'portfolio/' + slug + '/'
   const params: ListObjectsV2CommandInput = {
