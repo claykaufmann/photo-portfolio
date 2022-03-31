@@ -46,8 +46,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params as IParams
   const portfolio = await getPortfolioBySlug(slug)
 
-  console.log(portfolio)
-
   // return portfolio
   return {
     props: {
