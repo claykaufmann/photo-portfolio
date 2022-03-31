@@ -9,7 +9,7 @@ export interface PortfolioThumbnail {
   slug: string
   title: string
   headerImage: Photo
-  description?: string
+  description: string
 }
 
 export interface Photo {
@@ -17,4 +17,9 @@ export interface Photo {
   width: number
   height: number
   alt?: string
+}
+
+export interface MarkdownPortfolioInfo {
+  title: string
+  description: string
 }
