@@ -8,7 +8,7 @@ import {
 import { ParsedUrlQuery } from 'querystring'
 import Image from 'next/image'
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
-import { Flex } from '@chakra-ui/react'
+import { Flex, Heading } from '@chakra-ui/react'
 
 type Props = {
   portfolio: PortfolioInfo
@@ -18,11 +18,13 @@ const PortfolioPage: NextPage<Props> = ({ portfolio }) => {
   const images = portfolio.photos
   return (
     <Base headerColor="black">
-      <h2>{portfolio.title}</h2>
+      <Heading size="lg" textAlign="center">
+        {portfolio.title}
+      </Heading>
       <p>{portfolio.description}</p>
 
       <ResponsiveMasonry
-        columnsCountBreakPoints={{ 350: 1, 1079: 2, 1400: 3, 2545: 4 }}
+        columnsCountBreakPoints={{ 350: 1, 800: 2, 1400: 3, 2545: 4 }}
       >
         <Masonry gutter="1em">
           {images.map((image) => (
