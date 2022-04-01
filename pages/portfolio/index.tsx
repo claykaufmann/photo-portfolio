@@ -13,7 +13,7 @@ type Props = {
 
 const Portfolio: NextPage<Props> = ({ portfolios }) => {
   return (
-    <Base headerColor="black">
+    <Base textColor="black">
       <Head>
         <title>Portfolio</title>
       </Head>
@@ -22,7 +22,7 @@ const Portfolio: NextPage<Props> = ({ portfolios }) => {
         Portfolios
       </Heading>
 
-      <Flex>
+      <Flex justifyContent="center">
         {portfolios.map((portfolio) => (
           <NextLink href={`portfolio/${portfolio.slug}`} key={portfolio.slug}>
             <Link>

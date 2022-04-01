@@ -17,7 +17,7 @@ type Props = {
 const PortfolioPage: NextPage<Props> = ({ portfolio }) => {
   const images = portfolio.photos
   return (
-    <Base headerColor="black">
+    <Base textColor="black">
       <Heading size="lg" textAlign="center">
         {portfolio.title}
       </Heading>

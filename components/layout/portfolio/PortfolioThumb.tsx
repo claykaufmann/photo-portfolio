@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { PortfolioThumbnail } from '../../../types/types'
 import Image from 'next/image'
-import { Container, Heading } from '@chakra-ui/react'
+import { Container, Heading, Text } from '@chakra-ui/react'
 
 type Props = {
   portfolio: PortfolioThumbnail
@@ -9,16 +9,19 @@ type Props = {
 
 const PortfolioThumb: React.VFC<Props> = ({ portfolio }) => {
   return (
-    <Container height="20vh">
-      <Heading size="md">{portfolio.title}</Heading>
+    <Container>
       <Image
         src={portfolio.headerImage.url}
         height={portfolio.headerImage.height}
         width={portfolio.headerImage.width}
         alt={portfolio.headerImage.alt}
-        priority={true}
+        objectFit="cover"
       />
-      <p>{portfolio.description}</p>
+      <Heading size="md" textAlign="center">
+        {portfolio.title}
+      </Heading>
+
+      <Text visibility="hidden">{portfolio.description}</Text>
     </Container>
   )
 }

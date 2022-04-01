@@ -12,9 +12,9 @@ const Home: NextPage = () => {
         <title>Clay Kaufmann Photography</title>
       </Head>
 
-      <Box margin="0.5em 2em">
-        <Header textColor="white" />
+      <Header textColor="black" isHomePage={true} />
 
+      <Box margin="0.5em 2em">
         <Center height="50vh" color="white" textShadow="1px 1px 1px #3c5c5e">
           <Stack
             paddingTop={['7rem', '9rem', '5rem', '12rem']}
