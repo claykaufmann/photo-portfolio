@@ -1,11 +1,11 @@
-.linktext {
+.strikeThroughLink {
   position: relative;
   display: block;
   cursor: pointer;
 }
 
-.linktext:before,
-.linktext:after {
+.strikeThroughLink:before,
+.strikeThroughLink:after {
   content: '';
   position: absolute;
   width: 0%;
@@ -15,23 +15,26 @@
   background: black;
 }
 
-.linktext:before {
+.strikeThroughLink:before {
   left: -2.5px;
 }
-.linktext:after {
+.strikeThroughLink:after {
   right: 2.5px;
   background: black;
+  height: 0.1rem;
   transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.linktext:hover:before {
+.strikeThroughLink:hover:before {
   background: black;
   width: 100%;
+  height: 0.1rem;
   transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.linktext:hover:after {
+.strikeThroughLink:hover:after {
   background: transparent;
   width: 100%;
+  height: 0.1rem;
   transition: 0s;
 }
