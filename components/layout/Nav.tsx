@@ -17,7 +17,7 @@ const Nav: React.VFC<props> = ({ textColor }) => {
     nav = <BurgerMenuMobile textColor={textColor} />
   } else {
     nav = (
-      <HStack color={textColor}>
+      <HStack color={textColor} fontSize="120%" spacing="1.5em">
         <NavLink href="/portfolio" linkText="Portfolio" />
 
         <NavLink href="/film" linkText="Film" />
