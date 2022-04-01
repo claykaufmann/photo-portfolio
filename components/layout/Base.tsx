@@ -4,10 +4,12 @@ import Head from 'next/head'
 import { Box } from '@chakra-ui/react'
 
 interface props {
-  headerColor: string
+  textColor: string
+  children: JSX.Element[] | JSX.Element
 }
 
-const Base: React.FC<props> = (Props, { headerColor }) => {
+const Base: React.VFC<props> = ({ textColor, children }) => {
+  console.log(textColor)
   return (
     <React.Fragment>
       <Head>
@@ -21,8 +23,8 @@ const Base: React.FC<props> = (Props, { headerColor }) => {
       </Head>
 
       <Box margin="0.5em 2em">
-        <Header textColor={headerColor} />
-        <React.Fragment>{Props.children}</React.Fragment>
+        <Header textColor={textColor} />
+        <React.Fragment>{children}</React.Fragment>
       </Box>
     </React.Fragment>
   )
