@@ -3,6 +3,7 @@ import { useMediaQuery } from '../hooks/useMediaQuery'
 import { Link, HStack } from '@chakra-ui/react'
 import BurgerMenuMobile from '../BurgerMobile/BurgerMenuMobile'
 import NavLink from './NavLink'
+import styles from './Nav.module.scss'
 
 interface props {
   textColor: string
@@ -27,11 +28,10 @@ const Nav: React.VFC<props> = ({ textColor }) => {
         <Link
           href="https://claykaufmann.com"
           _hover={{
-            textDecoration: 'line-through',
-            transition: 'width 0.5s ease-in',
+            textDecoration: 'none',
           }}
         >
-          Main Site
+          <span className={styles.linktext}>Main Site</span>
         </Link>
       </HStack>
     )

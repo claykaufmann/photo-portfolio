@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Link } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
+import styles from './Nav.module.scss'
 
 interface props {
   linkText: string
@@ -15,11 +16,10 @@ const NavLink: React.VFC<props> = ({ href, linkText }) => {
       <Link
         textDecoration={router.pathname === `${href}` ? 'line-through' : 'none'}
         _hover={{
-          textDecoration: 'line-through',
-          transition: 'width 0.5s ease-in',
+          textDecoration: 'none',
         }}
       >
-        {linkText}
+        <span className={styles.linktext}>{linkText}</span>
       </Link>
     </NextLink>
   )
