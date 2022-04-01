@@ -63,7 +63,7 @@ const Menu: React.VFC<Props> = ({ open, setOpen }) => {
           ABOUT
         </Link>
       </NextLink>
-      <Link
+      {/* <Link
         style={{ textDecoration: 'none' }}
         transition="color 0.3s linear"
         color="black"
@@ -73,7 +73,7 @@ const Menu: React.VFC<Props> = ({ open, setOpen }) => {
         href="https://claykaufmann.com"
       >
         MAIN SITE
-      </Link>
+      </Link> */}
     </nav>
   )
 }

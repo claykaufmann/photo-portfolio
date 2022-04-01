@@ -24,7 +24,7 @@ const Nav: React.VFC<props> = ({ textColor }) => {
         <NavLink href="/film" linkText="Film" />
 
         <NavLink href="/about" linkText="About" />
-
+        {/*
         <Link
           href="https://claykaufmann.com"
           _hover={{
@@ -32,7 +32,7 @@ const Nav: React.VFC<props> = ({ textColor }) => {
           }}
         >
           <span className={utilStyles.strikeThroughLink}>Main Site</span>
-        </Link>
+        </Link> */}
       </HStack>
     )
   }
