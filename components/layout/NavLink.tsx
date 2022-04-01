@@ -25,10 +25,18 @@ const NavLink: React.VFC<props> = ({ href, linkText }) => {
       <Link
         textDecoration={pageName === `${href}` ? 'line-through' : 'none'}
         _hover={{
-          textDecoration: 'none',
+          textDecoration: pageName === `${href}` ? 'line-through' : 'none',
         }}
       >
-        <span className={utilStyles.strikeThroughLink}>{linkText}</span>
+        <span
+          className={
+            pageName != `${href}`
+              ? utilStyles.strikeThroughLink
+              : utilStyles.normalStrikeThrough
+          }
+        >
+          {linkText}
+        </span>
       </Link>
     </NextLink>
   )
