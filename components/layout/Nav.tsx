@@ -1,9 +1,8 @@
 import * as React from 'react'
 import { useMediaQuery } from '../hooks/useMediaQuery'
-import { Link, HStack } from '@chakra-ui/react'
+import { HStack } from '@chakra-ui/react'
 import BurgerMenuMobile from '../BurgerMobile/BurgerMenuMobile'
 import NavLink from './NavLink'
-import utilStyles from '../../styles/utils.module.scss'
 
 interface props {
   textColor: string
@@ -24,15 +23,6 @@ const Nav: React.VFC<props> = ({ textColor }) => {
         <NavLink href="/film" linkText="Film" />
 
         <NavLink href="/about" linkText="About" />
-        {/*
-        <Link
-          href="https://claykaufmann.com"
-          _hover={{
-            textDecoration: 'none',
-          }}
-        >
-          <span className={utilStyles.strikeThroughLink}>Main Site</span>
-        </Link> */}
       </HStack>
     )
   }
