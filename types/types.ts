@@ -17,9 +17,10 @@ export interface Photo {
   width: number
   height: number
   alt?: string
+  name?: string
 }
 
-export interface MarkdownPortfolioInfo {
+export interface JSONPortfolioInfo {
   title: string
   description: string
 }

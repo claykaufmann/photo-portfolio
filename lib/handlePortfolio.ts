@@ -3,18 +3,19 @@ import {
   PortfolioInfo,
   Photo,
   PortfolioThumbnail,
-  MarkdownPortfolioInfo,
+  JSONPortfolioInfo,
 } from '../types/types'
 import { s3Client, bucketRegion, bucketName } from './s3Client'
 import {
-  GetObjectCommand,
-  GetObjectCommandInput,
   ListObjectsV2Command,
   ListObjectsV2CommandInput,
   ListObjectsV2CommandOutput,
 } from '@aws-sdk/client-s3'
 import probe from 'probe-image-size'
-import matter from 'gray-matter'
+import fs from 'fs'
+import { join } from 'path'
+
+const portfolioDirec = join(process.cwd(), 'portfolios')
 
 export const getPortfolioSlugs = async (): Promise<string[]> => {
   // params for req
@@ -72,8 +73,6 @@ export const getPortfolioBySlug = async (
 export const getPhotosFromPortfolio = async (
   slug: string
 ): Promise<Photo[]> => {
-  // TODO: this function seems to be extremely slow...
-
   // set prefix
   const prefix = 'portfolio/' + slug + '/'
   const params: ListObjectsV2CommandInput = {
@@ -101,8 +100,8 @@ export const getPhotosFromPortfolio = async (
       // append tag
       const url = bucketURL + response.Contents[index].Key
 
-      // dont read in markdown file, this will break things
-      if (url.slice(-2) != 'md') {
+      // only read in jpg images
+      if (url.slice(-3) == 'jpg') {
         photoURLs.push(url)
       }
       index = index + 1
@@ -113,6 +112,8 @@ export const getPhotosFromPortfolio = async (
   const images = await Promise.all(
     photoURLs.map(async (url) => {
       const photoInfo = await probe(url)
+
+      // TODO: handle getting the image name, if we save the image with the specific name, then can use that as alt text too
 
       const newImage: Photo = {
         url: url,
@@ -126,6 +127,7 @@ export const getPhotosFromPortfolio = async (
 
   // randomize image order
   // TODO: Maybe remove this in the future, if slowdowns
+  // if we specifically order photos, REMOVE THIS LINE
   images.sort(() => Math.random() - 0.5)
 
   // return photos
@@ -196,46 +198,34 @@ export const getAllPortfolios = async (): Promise<PortfolioThumbnail[]> => {
   return portfolios
 }
 
-const streamToString = async (stream: any): Promise<string> =>
-  new Promise((resolve, reject) => {
-    const chunks: any = []
-    stream.on('data', (chunk: any) => chunks.push(chunk))
-    stream.on('error', reject)
-    stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')))
-  })
-
 /**
- * get all portfolio information
+ * get all portfolio information from local json files
  * @param slug the name of the portfolio
  */
 export const getPortfolioInformation = async (
   slug: string
-): Promise<MarkdownPortfolioInfo> => {
-  const key = 'portfolio/' + slug + '/' + slug + '.md'
+): Promise<JSONPortfolioInfo> => {
+  // get local path of file
+  const path = join(portfolioDirec, `${slug}.json`)
 
-  // query s3 for data
-  const params: GetObjectCommandInput = {
-    Bucket: bucketName,
-    Key: key,
-  }
+  let contents = ''
 
-  const command = new GetObjectCommand(params)
-  const response = await s3Client.send(command)
-
-  if (response.Body) {
-    const res: string = await streamToString(response.Body)
-    const { data } = matter(res)
-
-    const info: MarkdownPortfolioInfo = {
-      title: data.title,
-      description: data.description,
+  // attempt to get contents, if none can be found, return unknown
+  try {
+    contents = fs.readFileSync(path, 'utf8')
+  } catch (e) {
+    return {
+      title: 'Unknown',
+      description: 'unknown',
     }
-
-    return info
   }
 
+  // parse the json info
+  const data = JSON.parse(contents)
+
+  // return the info
   return {
-    title: 'None',
-    description: 'None',
+    title: data.title,
+    description: data.description,
   }
 }
