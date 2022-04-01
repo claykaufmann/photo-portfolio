@@ -1,26 +1,36 @@
 import * as React from 'react'
 import { PortfolioThumbnail } from '../../../types/types'
-import Image from 'next/image'
-import { Heading } from '@chakra-ui/react'
+import { Heading, Box } from '@chakra-ui/react'
 
 type Props = {
   portfolio: PortfolioThumbnail
 }
 
 const PortfolioThumb: React.VFC<Props> = ({ portfolio }) => {
+  const basicBoxStyles = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+    boxSize: ['250px', '250px', '300px', '400px', '500px'],
+    color: 'white',
+    textShadow: '0 0 20px black',
+    fontWeight: 'bold',
+    fontSize: '20px',
+    px: 4,
+    background: `url(${portfolio.headerImage.url}) center/cover no-repeat`,
+  }
   return (
-    <div>
-      <Image
-        src={portfolio.headerImage.url}
-        height={portfolio.headerImage.height}
-        width={portfolio.headerImage.width}
-        alt={portfolio.headerImage.alt}
-        objectFit="cover"
-      />
-      <Heading size="md" textAlign="center">
-        {portfolio.title}
-      </Heading>
-    </div>
+    <Box
+      _hover={{
+        transitionDuration: '0.2s',
+        opacity: '0.8',
+        textDecor: 'none',
+      }}
+      sx={basicBoxStyles}
+    >
+      <Heading size="md">{portfolio.title}</Heading>
+    </Box>
   )
 }
 

@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Base from '../../components/layout/Base'
 import { PortfolioThumbnail } from '../../types/types'
 import { getAllPortfolios } from '../../lib/handlePortfolio'
-import { Flex, Link, Heading } from '@chakra-ui/react'
+import { Flex, Link, Heading, Box } from '@chakra-ui/react'
 import PortfolioThumb from '../../components/layout/portfolio/PortfolioThumb'
 import NextLink from 'next/link'
 
@@ -18,17 +18,19 @@ const Portfolio: NextPage<Props> = ({ portfolios }) => {
         <title>Portfolio</title>
       </Head>
 
-      <Heading size="lg" textAlign="center">
+      <Heading size="lg" textAlign="center" paddingBottom="0.5em">
         Portfolios
       </Heading>
 
-      <Flex justifyContent="center" experimental_spaceX="1.5em">
+      <Flex justifyContent="space-evenly" flexWrap="wrap">
         {portfolios.map((portfolio) => (
-          <NextLink href={`portfolio/${portfolio.slug}`} key={portfolio.slug}>
-            <Link>
-              <PortfolioThumb portfolio={portfolio} />
-            </Link>
-          </NextLink>
+          <Box paddingBottom="1em" key={portfolio.slug}>
+            <NextLink href={`portfolio/${portfolio.slug}`}>
+              <Link>
+                <PortfolioThumb portfolio={portfolio} />
+              </Link>
+            </NextLink>
+          </Box>
         ))}
       </Flex>
     </Base>
