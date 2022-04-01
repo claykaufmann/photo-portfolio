@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   PortfolioInfo,
   Photo,
@@ -11,11 +10,13 @@ import {
   ListObjectsV2CommandInput,
   ListObjectsV2CommandOutput,
 } from '@aws-sdk/client-s3'
-import probe from 'probe-image-size'
+import probe, { ProbeResult } from 'probe-image-size'
 import fs from 'fs'
 import { join } from 'path'
 
 const portfolioDirec = join(process.cwd(), 'portfolios')
+
+const bucketURL = `https://${bucketName}.s3.${bucketRegion}.amazonaws.com/`
 
 export const getPortfolioSlugs = async (): Promise<string[]> => {
   // params for req
@@ -90,8 +91,6 @@ export const getPhotosFromPortfolio = async (
   const photoURLs = []
 
   // the base bucket URL
-  const bucketURL =
-    'https://' + bucketName + '.s3.' + bucketRegion + '.amazonaws.com/'
 
   // iterate starting with second object, first is just the prefix name
   let index = 1
@@ -100,8 +99,8 @@ export const getPhotosFromPortfolio = async (
       // append tag
       const url = bucketURL + response.Contents[index].Key
 
-      // only read in jpg images
-      if (url.slice(-3) == 'jpg') {
+      // only read in jpg images, and not the header (it is specifically cropped)
+      if (url.slice(-3) == 'jpg' && url.slice(-10) != 'header.jpg') {
         photoURLs.push(url)
       }
       index = index + 1
@@ -125,11 +124,6 @@ export const getPhotosFromPortfolio = async (
     })
   )
 
-  // randomize image order
-  // TODO: Maybe remove this in the future, if slowdowns
-  // if we specifically order photos, REMOVE THIS LINE
-  images.sort(() => Math.random() - 0.5)
-
   // return photos
   return images
 }
@@ -140,28 +134,49 @@ export const getPhotosFromPortfolio = async (
  */
 export const getPortfolioHeaderImage = async (slug: string): Promise<Photo> => {
   // TODO: come back to this idea of randomly selecting photos
+  // change this to instead collect photo with filename "header.jpg"
   // connect to s3, request all objects in specified prefix that end with jpg, select a random one
-  const photos = await getPhotosFromPortfolio(slug)
 
-  // randomly select a photo
-  let index = Math.floor(Math.random() * photos.length)
+  // first, attempt to get the normal header image
+  const prefix = `portfolio/${slug}/`
 
-  // get image
-  let img = photos[index]
+  const photoURL = `${bucketURL}${prefix}header.jpg`
 
-  // for now, for simplicity on CSS, only allow landscape orientation
-  while (img.height > img.width) {
-    index = Math.floor(Math.random() * photos.length)
-    img = photos[index]
+  let photoInfo: ProbeResult
+
+  try {
+    // try to get the photo info
+    photoInfo = await probe(photoURL)
+  } catch (error) {
+    // if something goes wrong, do fallback of randomly selecting an image
+    const photos = await getPhotosFromPortfolio(slug)
+
+    // randomly select a photo
+    let index = Math.floor(Math.random() * photos.length)
+
+    // get image
+    let img = photos[index]
+
+    // for now, for simplicity on CSS, only allow landscape orientation
+    while (img.height > img.width) {
+      index = Math.floor(Math.random() * photos.length)
+      img = photos[index]
+    }
+
+    const headerImage: Photo = {
+      url: img.url,
+      width: img.width,
+      height: img.height,
+    }
+    return headerImage
   }
 
-  const headerImage: Photo = {
-    url: img.url,
-    width: img.width,
-    height: img.height,
+  // return collected image
+  return {
+    url: photoURL,
+    width: photoInfo.width,
+    height: photoInfo.height,
   }
-
-  return headerImage
 }
 
 /**
