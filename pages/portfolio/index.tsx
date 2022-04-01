@@ -22,7 +22,7 @@ const Portfolio: NextPage<Props> = ({ portfolios }) => {
         Portfolios
       </Heading>
 
-      <Flex justifyContent="center">
+      <Flex justifyContent="center" experimental_spaceX="1.5em">
         {portfolios.map((portfolio) => (
           <NextLink href={`portfolio/${portfolio.slug}`} key={portfolio.slug}>
             <Link>
@@ -36,10 +36,8 @@ const Portfolio: NextPage<Props> = ({ portfolios }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  // getAllPortfolios
+  // get all portfolios for display on page
   const portfolios = await getAllPortfolios()
-
-  // testS3('main')
 
   return {
     props: {
