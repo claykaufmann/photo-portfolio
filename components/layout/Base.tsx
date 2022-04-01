@@ -9,7 +9,6 @@ interface props {
 }
 
 const Base: React.VFC<props> = ({ textColor, children }) => {
-  console.log(textColor)
   return (
     <React.Fragment>
       <Head>
