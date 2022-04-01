@@ -3,7 +3,7 @@ import { useMediaQuery } from '../hooks/useMediaQuery'
 import { Link, HStack } from '@chakra-ui/react'
 import BurgerMenuMobile from '../BurgerMobile/BurgerMenuMobile'
 import NavLink from './NavLink'
-import styles from './Nav.module.scss'
+import utilStyles from '../../styles/utils.module.scss'
 
 interface props {
   textColor: string
@@ -31,7 +31,7 @@ const Nav: React.VFC<props> = ({ textColor }) => {
             textDecoration: 'none',
           }}
         >
-          <span className={styles.linktext}>Main Site</span>
+          <span className={utilStyles.strikeThroughLink}>Main Site</span>
         </Link>
       </HStack>
     )
