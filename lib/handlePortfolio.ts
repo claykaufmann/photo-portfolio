@@ -124,6 +124,10 @@ export const getPhotosFromPortfolio = async (
     })
   )
 
+  // randomize image order
+  // TODO: Maybe remove this in the future, if slowdowns
+  images.sort(() => Math.random() - 0.5)
+
   // return photos
   return images
 }
