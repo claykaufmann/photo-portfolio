@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { Heading, Stack, Center, Box } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import styles from '../styles/Home.module.scss'
+import Footer from '../components/layout/Footer'
 
 const Home: NextPage = () => {
   return (
@@ -47,6 +48,9 @@ const Home: NextPage = () => {
             </NextLink>
           </Stack>
         </Center>
+      </Box>
+      <Box pos="fixed" bottom={0}>
+        <Footer textColor="white" />
       </Box>
     </div>
   )
