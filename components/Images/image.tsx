@@ -1,10 +1,54 @@
 import * as React from 'react'
+import { Photo } from '../../types/types'
+import Image from 'next/image'
+import {
+  Flex,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  useDisclosure,
+} from '@chakra-ui/react'
 
-const Photo = () => {
+type Props = {
+  image: Photo
+}
+
+const Photo: React.VFC<Props> = ({ image }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
-    <figure>
-      <img />
-    </figure>
+    <React.Fragment>
+      <Flex justify="center">
+        <div onClick={onOpen}>
+          <Image
+            src={image.url}
+            width={image.width}
+            height={image.height}
+            alt="test"
+            className="portfolio-img"
+          />
+          <style jsx global>
+            {`
+              .portfolio-img {
+                align-self: center;
+              }
+            `}
+          </style>
+        </div>
+      </Flex>
+      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+        <ModalOverlay />
+        <ModalContent>
+          <Image
+            src={image.url}
+            width={image.width}
+            height={image.height}
+            alt="test"
+            className="portfolio-img"
+          />
+        </ModalContent>
+      </Modal>
+    </React.Fragment>
   )
 }
 
