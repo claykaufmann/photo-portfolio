@@ -1,4 +1,4 @@
-import { HStack, Text, Link } from '@chakra-ui/layout'
+import { HStack, Link } from '@chakra-ui/layout'
 import { IconButton } from '@chakra-ui/react'
 import {
   AiOutlineInstagram,
