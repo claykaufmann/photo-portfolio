@@ -1,55 +1,53 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { Heading, Stack, Center, Box } from '@chakra-ui/react'
+import NextLink from 'next/link'
+import styles from '../styles/Home.module.scss'
 
 const Home: NextPage = () => {
   return (
-    <div className={styles.container}>
+    <div className={styles.splash}>
       <Head>
         <title>Clay Kaufmann Photography</title>
-        <meta
-          name="description"
-          content="Photography portfolio of Clay Kaufmann"
-        />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>Site under construction...</h1>
-        <p>Soon to be my photography portfolio...</p>
-        <p>
-          In the meantime, check me out on{' '}
-          <a
-            className={styles.link}
-            target="_blank"
-            href="https://www.instagram.com/byclaykay/"
-            rel="noreferrer"
+      <Box margin="0.5em 2em">
+        <NextLink href="/">
+          <Heading
+            size="2xl"
+            color="white"
+            textShadow="1px 1px 1px #3c5c5e"
+            cursor="pointer"
           >
-            instagram!
-          </a>
-        </p>
-        <p>
-          Visit{' '}
-          <a
-            className={styles.link}
-            target="_blank"
-            href="https://claykaufmann.com"
-            rel="noreferrer"
+            BYCLAYKAY.
+          </Heading>
+        </NextLink>
+        <Center height="50vh" color="white" textShadow="1px 1px 1px #3c5c5e">
+          <Stack
+            paddingTop={['7rem', '9rem', '5rem', '12rem']}
+            direction={['column', 'column', 'row']}
+            spacing={['5rem', '5rem', '7rem', '15rem']}
           >
-            my main site!
-          </a>
-        </p>
-        <p>
-          Or get in touch with me via email at{' '}
-          <a className={styles.link} href="mailto:claykaufmann@gmail.com">
-            claykaufmann@gmail.com
-          </a>
-        </p>
-      </main>
-
-      <footer className={styles.footer}>
-        <p>Site built by Clay Kaufmann</p>
-      </footer>
+            <NextLink href="/portfolio">
+              <Heading size="xl" cursor="pointer" _hover={{ color: 'gray' }}>
+                PORTFOLIO.
+              </Heading>
+            </NextLink>
+            {/*
+            <NextLink href="/film">
+              <Heading size="xl" cursor="pointer" _hover={{ color: 'gray' }}>
+                FILM.
+              </Heading>
+            </NextLink>
+ */}
+            <NextLink href="/about">
+              <Heading size="xl" cursor="pointer" _hover={{ color: 'gray' }}>
+                ABOUT.
+              </Heading>
+            </NextLink>
+          </Stack>
+        </Center>
+      </Box>
     </div>
   )
 }

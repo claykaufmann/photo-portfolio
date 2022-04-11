@@ -1,0 +1,41 @@
+.strikeThroughLink {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.strikeThroughLink:before,
+.strikeThroughLink:after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 5%;
+  top: 53%;
+  margin-top: -0.5px;
+  background: black;
+}
+
+.strikeThroughLink:before {
+  left: -2.5px;
+}
+.strikeThroughLink:after {
+  right: 2.5px;
+  background: black;
+  transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.strikeThroughLink:hover:before {
+  background: black;
+  width: 100%;
+  transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.strikeThroughLink:hover:after {
+  background: transparent;
+  width: 100%;
+  transition: 0s;
+}
+
+.normalStrikeThrough {
+  text-decoration: 'line-through';
+}

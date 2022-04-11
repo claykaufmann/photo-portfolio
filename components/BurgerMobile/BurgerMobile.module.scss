@@ -1,0 +1,83 @@
+// mixin to get rid of duplicate styling for opened and closed burger
+//  takes in a color which is used as the hover color
+@mixin baseBurgerStyle($color) {
+  position: relative;
+  margin-left: 1.5rem;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+  top: -0.4rem;
+
+  &:focus {
+    outline: none;
+  }
+
+  // @include theme.media("<=iphone-10") {
+  //     top: 2rem;
+  // }
+}
+
+/* One bar of the burger */
+.burgerBarBlack {
+  width: 2rem;
+  height: 0.25rem;
+  background: #092327;
+  border-radius: 10px;
+  transition: all 0.3s linear;
+  position: relative;
+  transform-origin: 1px;
+}
+
+.burgerBarWhite {
+  width: 2rem;
+  height: 0.25rem;
+  background: white;
+  border-radius: 10px;
+  transition: all 0.3s linear;
+  position: relative;
+  transform-origin: 1px;
+}
+
+/* The burger when it is in the 'X' mode */
+.cross {
+  @include baseBurgerStyle(#d2d2d2ee);
+
+  :first-child {
+    background: #d2d2d2ee;
+    transform: rotate(45deg);
+  }
+
+  :nth-child(2) {
+    background: #d2d2d2ee;
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  :nth-child(3) {
+    background: #d2d2d2ee;
+    transform: rotate(-45deg);
+  }
+
+  &:hover {
+    .burgerBar {
+      background: #f9f9f9ee;
+    }
+  }
+}
+
+/* The burger when it is burger mode */
+.burger {
+  @include baseBurgerStyle(#092327);
+
+  &:hover {
+    .burgerBar {
+      background: #707888;
+    }
+  }
+}

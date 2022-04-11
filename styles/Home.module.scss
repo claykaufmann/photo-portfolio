@@ -1,0 +1,8 @@
+.splash {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: url(../public/images/fall-forest.jpg) no-repeat center center
+    fixed;
+  background-size: cover;
+}
