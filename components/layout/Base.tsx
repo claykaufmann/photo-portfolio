@@ -2,6 +2,7 @@ import * as React from 'react'
 import Header from './Header'
 import Head from 'next/head'
 import { Box } from '@chakra-ui/react'
+import Footer from './Footer'
 
 interface props {
   textColor: string
@@ -21,10 +22,11 @@ const Base: React.VFC<props> = ({ textColor, children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Box margin="0.5em 2em">
+      <Box margin="0.5em 2em" flex={1}>
         <Header textColor={textColor} />
         <React.Fragment>{children}</React.Fragment>
       </Box>
+      <Footer textColor="black" />
     </React.Fragment>
   )
 }
