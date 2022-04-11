@@ -15,7 +15,13 @@ const Footer: React.VFC<props> = ({ textColor }) => {
   return (
     <React.Fragment>
       <HStack marginLeft="1rem" marginBottom="0.2rem">
-        <Text color={textColor}>Clay Kaufmann 2022</Text>
+        <Link
+          href="https://claykaufmann.com"
+          textColor={textColor}
+          isExternal={true}
+        >
+          Clay Kaufmann 2022
+        </Link>
 
         <Link href="https://www.instagram.com/byclaykay/" isExternal={true}>
           <IconButton
