@@ -41,7 +41,7 @@ const Menu: React.VFC<Props> = ({ open, setOpen }) => {
           PORTFOLIO
         </Link>
       </NextLink>
-      {/* <NextLink href="/film">
+      <NextLink href="/film">
         <Link
           style={{ textDecoration: 'none' }}
           transition="color 0.3s linear"
@@ -51,7 +51,7 @@ const Menu: React.VFC<Props> = ({ open, setOpen }) => {
         >
           FILM
         </Link>
-      </NextLink> */}
+      </NextLink>
       <NextLink href="/about">
         <Link
           style={{ textDecoration: 'none' }}
