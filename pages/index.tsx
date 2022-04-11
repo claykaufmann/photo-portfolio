@@ -34,13 +34,13 @@ const Home: NextPage = () => {
                 PORTFOLIO.
               </Heading>
             </NextLink>
-
+            {/*
             <NextLink href="/film">
               <Heading size="xl" cursor="pointer" _hover={{ color: 'gray' }}>
                 FILM.
               </Heading>
             </NextLink>
-
+ */}
             <NextLink href="/about">
               <Heading size="xl" cursor="pointer" _hover={{ color: 'gray' }}>
                 ABOUT.

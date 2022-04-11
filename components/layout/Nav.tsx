@@ -20,7 +20,7 @@ const Nav: React.VFC<props> = ({ textColor }) => {
       <HStack color={textColor} fontSize="120%" spacing="1.5em">
         <NavLink href="/portfolio" linkText="Portfolio" />
 
-        <NavLink href="/film" linkText="Film" />
+        {/* <NavLink href="/film" linkText="Film" /> */}
 
         <NavLink href="/about" linkText="About" />
       </HStack>
