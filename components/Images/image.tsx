@@ -6,6 +6,8 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
+  ModalCloseButton,
+  ModalBody,
   useDisclosure,
 } from '@chakra-ui/react'
 
@@ -36,16 +38,18 @@ const Photo: React.VFC<Props> = ({ image }) => {
           </style>
         </div>
       </Flex>
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="4xl">
         <ModalOverlay />
         <ModalContent>
-          <Image
-            src={image.url}
-            width={image.width}
-            height={image.height}
-            alt="test"
-            className="portfolio-img"
-          />
+          <ModalBody padding="2.1rem" backgroundColor="light-grey">
+            <Image
+              src={image.url}
+              width={image.width}
+              height={image.height}
+              alt="test"
+              className="portfolio-img"
+            />
+          </ModalBody>
         </ModalContent>
       </Modal>
     </React.Fragment>
