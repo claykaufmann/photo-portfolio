@@ -6,10 +6,10 @@ import {
   getPortfolioSlugs,
 } from '../../lib/handlePortfolio'
 import { ParsedUrlQuery } from 'querystring'
-import Image from 'next/image'
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
 import { Flex, Heading, Link } from '@chakra-ui/react'
 import NextLink from 'next/link'
+import Photo from '../../components/Images/image'
 
 type Props = {
   portfolio: PortfolioInfo
@@ -17,6 +17,7 @@ type Props = {
 
 const PortfolioPage: NextPage<Props> = ({ portfolio }) => {
   const images = portfolio.photos
+
   return (
     <Base textColor="black">
       <Heading size="lg" textAlign="center">
@@ -35,23 +36,7 @@ const PortfolioPage: NextPage<Props> = ({ portfolio }) => {
       >
         <Masonry gutter="1em">
           {images.map((image) => (
-            <Flex key={image.url} justify="center">
-              <Image
-                key={image.url}
-                src={image.url}
-                width={image.width}
-                height={image.height}
-                alt="test"
-                className="portfolio-img"
-              />
-              <style jsx global>
-                {`
-                  .portfolio-img {
-                    align-self: center;
-                  }
-                `}
-              </style>
-            </Flex>
+            <Photo key={image.url} image={image} />
           ))}
         </Masonry>
       </ResponsiveMasonry>
