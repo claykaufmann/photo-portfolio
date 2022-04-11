@@ -7,7 +7,7 @@ import {
 } from '../../lib/handlePortfolio'
 import { ParsedUrlQuery } from 'querystring'
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
-import { Flex, Heading, Link } from '@chakra-ui/react'
+import { Stack, Heading, Link, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import Photo from '../../components/Images/image'
 
@@ -24,12 +24,17 @@ const PortfolioPage: NextPage<Props> = ({ portfolio }) => {
         {portfolio.title}
       </Heading>
 
-      <Flex justify="space-between" paddingBottom="1em">
-        <p>{portfolio.description}</p>
+      <Stack
+        justify="space-between"
+        paddingBottom="1em"
+        direction={['column', 'row']}
+        textAlign={['center', 'left']}
+      >
+        <Text>{portfolio.description}</Text>
         <NextLink href="/portfolio">
           <Link>Back to portfolios</Link>
         </NextLink>
-      </Flex>
+      </Stack>
 
       <ResponsiveMasonry
         columnsCountBreakPoints={{ 350: 1, 800: 2, 1400: 3, 2545: 4 }}
