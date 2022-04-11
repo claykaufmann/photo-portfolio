@@ -22,6 +22,7 @@ const Home: NextPage = () => {
             BYCLAYKAY.
           </Heading>
         </NextLink>
+
         <Center height="50vh" color="white" textShadow="1px 1px 1px #3c5c5e">
           <Stack
             paddingTop={['7rem', '9rem', '5rem', '12rem']}
