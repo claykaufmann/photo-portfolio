@@ -14,8 +14,8 @@ const About: NextPage = () => {
       <Heading size="lg" textAlign="center" paddingBottom="0.7em">
         ABOUT
       </Heading>
-      <Container maxW="container.lg">
-        <Stack direction={['column', 'row']}>
+      <Container maxW="container.xl">
+        <Stack direction={['column', 'row']} spacing={10}>
           <Box>
             <Image
               height={2000}
