@@ -26,7 +26,7 @@ const Portfolio: NextPage<Props> = ({ portfolios }) => {
         {portfolios.map((portfolio) => (
           <Box paddingBottom="1em" key={portfolio.slug}>
             <NextLink href={`portfolio/${portfolio.slug}`}>
-              <Link>
+              <Link _hover={{ textDecor: 'none' }}>
                 <PortfolioThumb portfolio={portfolio} />
               </Link>
             </NextLink>

@@ -25,7 +25,6 @@ const PortfolioThumb: React.VFC<Props> = ({ portfolio }) => {
       _hover={{
         transitionDuration: '0.2s',
         opacity: '0.8',
-        textDecor: 'none',
       }}
       sx={basicBoxStyles}
     >
