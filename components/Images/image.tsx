@@ -28,13 +28,6 @@ const Photo: React.VFC<Props> = ({ image }) => {
             alt="test"
             className="portfolio-img"
           />
-          <style jsx global>
-            {`
-              .portfolio-img {
-                align-self: center;
-              }
-            `}
-          </style>
         </div>
       </Flex>
       <Modal isOpen={isOpen} onClose={onClose} size="4xl">
