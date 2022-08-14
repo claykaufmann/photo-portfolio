@@ -209,6 +209,16 @@ export const getAllPortfolios = async (): Promise<PortfolioThumbnail[]> => {
     })
   )
 
+  // move main to be at the front
+  for (let i = 0; i < portfolios.length; i++) {
+    if (portfolios[i].title === 'Main') {
+      // swap to beginning
+      const temp = portfolios[0]
+      portfolios[0] = portfolios[i]
+      portfolios[i] = temp
+    }
+  }
+
   // return portfolios
   return portfolios
 }
