@@ -14,7 +14,6 @@
     "@chakra-ui/system": "^2.2.11",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "chakra-ui": "^0.3.9",
     "framer-motion": "^4",
     "gray-matter": "^4.0.3",
     "next": "^12.3.1",
