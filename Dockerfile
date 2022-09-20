@@ -2,16 +2,28 @@
 FROM node:18-alpine3.15 AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
+
+# enable newer yarn
 RUN corepack enable
 WORKDIR /app
-COPY package.json yarn.lock ./
-RUN yarn install --immutable
+
+# copy necessary files to intall packages
+COPY package.json yarn.lock .yarnrc.yml ./
+
+# copy yarn version
+COPY .yarn/releases .yarn/releases/
+
+# install deps with yarn
+RUN yarn --immutable
 
 # Rebuild the source code only when needed
 FROM node:18-alpine3.15 AS builder
 WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-#COPY --from=deps /app/node_modules ./node_modules
+
+# enable newer yarn
+RUN corepack enable
 RUN yarn install
 RUN yarn build
 
@@ -28,7 +40,7 @@ RUN adduser -S nextjs -u 1001
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
-#COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 
 USER nextjs
