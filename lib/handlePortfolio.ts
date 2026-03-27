@@ -84,10 +84,15 @@ export const getPhotosFromPortfolio = async (
     photoURLs.map(async (url) => {
       const photoInfo = await probe(url)
 
+      // Derive alt text from filename (e.g. "my-photo.jpg" → "my photo")
+      const filename = url.split('/').pop()?.replace(/\.[^.]+$/, '') ?? ''
+      const alt = filename.replace(/[-_]/g, ' ')
+
       const newImage: Photo = {
         url: url,
         width: photoInfo.width,
         height: photoInfo.height,
+        alt,
       }
 
       return newImage
