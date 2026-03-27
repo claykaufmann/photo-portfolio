@@ -1,9 +1,15 @@
 import { getPortfolioBySlug, getPortfolioSlugs } from "@/lib/handlePortfolio"
 import Lightbox from "@/app/components/Lightbox"
 
+export const dynamic = "force-dynamic"
+
 export async function generateStaticParams() {
-  const slugs = await getPortfolioSlugs()
-  return slugs.map((slug) => ({ slug }))
+  try {
+    const slugs = await getPortfolioSlugs()
+    return slugs.map((slug) => ({ slug }))
+  } catch {
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {

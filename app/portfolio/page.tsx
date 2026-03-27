@@ -3,6 +3,8 @@ import Link from "next/link"
 import { getAllPortfolios } from "@/lib/handlePortfolio"
 import { PortfolioThumbnail } from "@/types/types"
 
+export const dynamic = "force-dynamic"
+
 export const metadata = {
   title: "Portfolio | Photo Portfolio",
   description: "Browse photography portfolios",
